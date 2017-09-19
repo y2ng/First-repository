@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件</title>
+	<script src="https://unpkg.com/vue"></script>
+	<script src="app.js"></script>
+</head>
+<body>
+	<div id="appBox">
+		<my-component class="abc"></my-component>
+		<hr>
+		<p>{{total}}</p>
+		<button-counter @increment="incrementTotal"></button-counter>
+		<button-counter @increment="incrementTotal"></button-counter>
+		<button-counter @increment="incrementTotal"></button-counter>
+	</div>
+</body>
+</html>

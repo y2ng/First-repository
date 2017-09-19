@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+<head>
+	<meta charset="UTF-8">
+	<title>Drag</title>
+	<style>
+		#box {
+			width: 100px; height: 100px; background-color: #f0f; cursor: move; position: relative; display: inline-block; vertical-align: middle;
+		}
+
+		i {
+			height: 100%;
+			vertical-align: middle;
+			display: inline-block;
+		}
+	</style>
+</head>
+<body style="height: 100%; position: relative; margin: 0; text-align: center;">
+	<i></i><div id="box"></div>
+<script>
+	var box = document.getElementById('box');
+	box.onmousedown = function(event){
+		var e = event || window.event,
+		orgX = box.offsetLeft,
+		orgY = box.offsetTop,
+		boxW = box.offsetWidth,
+		boxH = box.offsetHeight,
+		curX = e.clientX,
+		curY = e.clientY;
+		document.onmousemove = function (eve) {
+			var eve = eve || window.event,
+			newX = eve.clientX,
+			newY = eve.clientY;
+			changeX = newX - curX;
+			changeY = newY - curY;
+			document.querySelector("i").style.display = "inline";
+			document.querySelector("#box").style.display = "block";
+			if (orgX + changeX + boxW > document.body.clientWidth) {
+				box.style.left = document.body.clientWidth - boxW + "px";
+			} else if (orgX + changeX < 0) {
+				box.style.left = 0;
+			} else {
+				box.style.left = orgX + changeX + "px";
+			}
+			
+			if (orgY + changeY + boxH > document.body.clientHeight) {
+				box.style.top = document.body.clientHeight - boxH + "px";
+			} else if (orgY + changeY < 0) {
+				box.style.top = 0;
+			} else {
+				box.style.top = orgY + changeY + "px";
+			}	
+		}
+	};
+
+	document.onmouseup = function (event) {
+		document.onmousemove = null;
+	}
+</script>
+</body>
+</html>

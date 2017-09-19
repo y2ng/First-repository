@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="http://unpkg.com/vue"></script>
+</head>
+<body>
+	<div id="VueApp">
+		<child>
+			<template scope="props">
+				<span>hi from parent</span>
+				<br>
+				<span>{{props.text}}</span>
+				<br>
+				<span>{{props.cont}}</span>
+			</template>
+		</child>
+		<my-awesome-list :items="items">
+			<template slot="list" scope="prp">
+				<li>{{prp.text.name}}--{{prp.text.age}}</li>
+			</template>
+		</my-awesome-list>
+	</div>
+
+	<script>
+
+		Vue.component('child', {
+			template: '\
+			<div>\
+				<slot text="hello from child" cont="welcome"></slot>\
+			</div>\
+			'
+		})
+
+		Vue.component('my-awesome-list', {
+			template: '\
+				<ul>\
+					<slot name="list" v-for="item in items" :text="item"></slot>\
+				</ul>\
+			',
+			props: ['items']
+		})
+
+		var vm = new Vue({
+			el: '#VueApp',
+			data: {
+				items: [
+					{
+						name: 'John',
+						age: 29
+					}, {
+						name: 'Jack',
+						age: 22
+					}, {
+						name: 'Chris',
+						age: 30
+					}, {
+						name: 'Paul',
+						age: 27
+					}
+				]
+			}
+
+		})
+	</script>
+</body>
+</html>

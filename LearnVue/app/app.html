@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue instance</title>
+	<link rel="shortcut icon" href="https://cn.vuejs.org//images/logo.png">
+	<!-- <link rel="shortcut icon" href="https://developer.cdn.mozilla.net/static/img/favicon32.e1ca6d9bb933.png"> -->
+	<script src="https://unpkg.com/vue"></script>
+	<script>
+		window.onload = function(){
+			var vm = new Vue({
+				el: "#instance",
+				data: {
+					kcode: ""
+				},
+				methods: {
+					warn: function(a){
+						// if (b) {b.preventDefault()}
+						alert(a)
+					},
+					code: function(a){
+						this.kcode = a.keyCode
+					}
+				}
+			})
+		}
+	</script>
+</head>
+<body>
+	<div id="instance">
+		<button @click.prevent="warn('Form cannot be submitted yet.')">Submit</button>
+		<hr>
+		<label for="showcode">keycode</label>
+		<input type="text" @keydown.prevent="code($event)" v-model="kcode" id="showcode">
+		<hr>
+		<input type="text" @keyup.ctrl.67="warn(0)" @click.middle="warn(2)">
+	</div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="box">
+        <br>
+        <a :href="url" target="_blank" @click.prevent="doSomething">{{url}}</a>
+        <br>
+        <input type="text" v-model="url">
+        <p>{{ content | lowercase | capitalize }}</p>
+        <p>{{reverseContent}}</p>
+        <input type="text" v-model="firstName">
+        <br>
+        <input type="text" v-model="lastName">
+        <p>{{fullName}}</p>
+        <p :class="classObject" :style="baseStyle">hello, everybody</p>
+        <input type="checkbox" id="control" v-model="ok">
+        <label for="control">{{ok}}</label>
+        <input type="checkbox" id="test" :checked="en">
+        <label for="test">{{en}}</label>
+        <br>
+        <input type="text" v-model="num">
+        <h1 v-if="num > 0">现在是正数</h1>
+        <h1 v-else-if="num < 0">现在是负数</h1>
+        <h1 v-else-if="num == 0 && num.length != 0">0</h1>
+        <h1 v-else>请输入...</h1>
+        <ul>
+            <li v-for="(a, b) of items">{{ b + 1 }} - {{ a }}</li>
+        </ul>
+        <button @click="counter += 1">click</button>
+        <p>{{counter}}</p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#box",
+            data: {
+                url: "http://www.bing.com",
+                content: "PING",
+                counter: 0,
+                num: 1,
+                ok: "",
+                en: false,
+                firstName: "James",
+                lastName: "Harden",
+                items: [
+                    "kobe",
+                    "james",
+                    "jordan"
+                ],
+                classObject: {
+                    active: true,
+                    'text-danger': true
+                },
+                baseStyle: {
+                    color: "red",
+                    fontSize: "22px",
+                    textAlign: "center",
+                    transform: "rotate(15deg)"
+
+                }
+            },
+            methods: {
+                doSomething: function () {
+                    confirm("wao")
+                }
+            },
+            filters: {
+                capitalize: function (params) {
+                    if (!params) {
+                        return ""
+                    }
+                    var param = params.toString();
+                    return param[0].toUpperCase() + param.slice(1);
+                },
+                lowercase: function(value){
+                    if (!value) {
+                        return ""
+                    }
+                    var value = value.toString();
+                    return value.toLowerCase();
+                }
+            },
+            computed: {
+                reverseContent: function (params) {
+                    return this.content.split("").reverse().join("");
+                },
+                fullName: function(){
+                    return this.firstName + " " + this.lastName
+                }
+            }
+        })
+    </script>
+</body>
+</html>

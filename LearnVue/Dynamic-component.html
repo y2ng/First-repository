@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dynamic Component</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="appVue">
+        <component :is='currentView'></component>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#appVue',
+            data: {
+                currentView: 'home'
+            },
+            components: {
+                home: {
+                    template: '\
+                        <p>Dynamic Component</p>\
+                    '
+                },
+                school: {
+                    template: '\
+                        <p>Learn something in school</p>\
+                    '
+                },
+                camp: {
+                    template: '\
+                        <p>We\'re in camp now.</p>\
+                    '
+                }
+            }
+        })
+    </script>
+</body>
+</html>

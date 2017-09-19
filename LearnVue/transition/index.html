@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>transition</title>
+	<script src="http://unpkg.com/vue"></script>
+	<style>
+		html,body {
+			height: 100%;
+		}
+		div#app {
+			text-align: center;
+		}
+		button {
+			background-color: #666;
+			width: 4rem;
+			height: 2rem;
+			text-align: center;
+			border-radius: .5rem;
+			color: white;
+			margin: 1rem;
+			cursor: pointer;
+		}
+		div.wrap {
+			width: 100%;
+			height: 6rem;
+			text-align: center;
+		}
+		div.wrap>i {
+			display: inline-block;
+			height: 6rem;
+			width: 0;
+			vertical-align: middle;
+		}
+		.obj {
+			line-height: 6rem;
+			background-color: green;
+			text-align: center;
+			vertical-align: middle;
+			overflow: hidden;
+			display: inline-block;
+			width: 30%;
+		}
+		.move-enter-to,
+		.move-leave {
+			line-height: 6rem;
+			width: 30%;
+			opacity: 1;
+		}
+		.move-enter,
+		.move-leave-to {
+			opacity: 0;
+			width: 0%;
+			line-height: 0rem;
+		}
+		.move-enter-active {
+			transition: width .3s, line-height .3s, opacity 1s;
+		}
+		.move-leave-active {
+			transition: width 1.5s, line-height 1.5s, opacity .5s;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<button @click="dismiss = !dismiss">click</button>
+		<hr>
+		<div class="wrap">
+			<i></i><transition name="move">
+				<div v-show="dismiss" class="obj">
+					Let me tell you a stor!
+				</div>
+			</transition>
+		</div>
+	</div>
+	<script>
+		var app = new Vue({
+			el: '#app',
+			data: {
+				dismiss: true
+			}
+		})
+	</script>
+	<script>document.write('<script src="http://' + (location.host || '${1:localhost}').split(':')[0] + ':${2:35729}/livereload.js?snipver=1"></' + 'script>')</script>
+</body>
+</html>
